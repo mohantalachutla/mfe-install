@@ -1,0 +1,3 @@
+[submodule "mfe-utils"]
+	path = mfe-utils
+	url = git@github.com:mohantalachutla/mfe-utils.git
