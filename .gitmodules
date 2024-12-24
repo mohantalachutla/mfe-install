@@ -4,3 +4,6 @@
 [submodule "mfe-starter-react"]
 	path = mfe-starter-react
 	url = git@github.com:mohantalachutla/mfe-starter-react.git
+[submodule "mfe-host-starter"]
+	path = mfe-host-starter
+	url = git@github.com:mohantalachutla/mfe-host-starter.git
