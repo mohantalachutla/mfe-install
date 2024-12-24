@@ -7,3 +7,6 @@
 [submodule "mfe-host-starter"]
 	path = mfe-host-starter
 	url = git@github.com:mohantalachutla/mfe-host-starter.git
+[submodule "mongoapi"]
+	path = mongoapi
+	url = git@github.com:mohantalachutla/mongoapi.git
