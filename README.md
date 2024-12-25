@@ -10,15 +10,38 @@ git clone git@github.com:mohantalachutla/mfe-install.git
 ```
 #### 2. Run
 ```bash
-docker compose up
+. install.sh
 ```
 
-## MFE DEPLOYMENT
 
-#### Adding submodules
+## APPLICATION STRUCTURE
+#### 1. Host Application
+###### A React App with MFE support running on port 8080
+#### 2. MFE Frontend
+###### A React App which is a MFE running on port 8081
+#### 3. API Application
+###### An Express App with MongoDB running on port 3001
+#### 4. Dashboard Application
+###### A React App which deplays the meta data of all the registered MFEs in the system and it's current status
+#### 5. MFE Utils
+###### A Library to configure MFEs using Webpack ModuleFederationPlugin
+#### 6. Inject Store
+###### A Redux based Library to manage synchronized state across MFEs and Host
+
+## TROUBLESHOOTING
+#### 1. .ENV file should be present in the root directory of respective submodules
+#### 2. Migration data should be present in the api container
+#### 3. Ports should be free 27017, 3001,8080, 8081, 9001, 9002 ...
+#### 4. Pull latest submodules from remote if required
+
+
+
+## MFE DEVELOPMENT
+#### Adding new submodules
 ```bash
-git submodule add git@github.com:mohantalachutla/mfe-utils.git
+git submodule add git@github.com:mohantalachutla/mfe-host.git
 git submodule add git@github.com:mohantalachutla/mfe-frontend.git
+git submodule add git@github.com:mohantalachutla/mfe-frontend2.git
 git push origin master
 ```
 
@@ -35,11 +58,3 @@ git submodule update --remote mfe-frontend
 ```bash
 git submodule foreach git push origin master
 ```
-
-## Troubleshooting
-#### 1. .ENV file should be present in the root directory
-#### 2. Ports should be free 27017, 3001,8080, 8081, 9001, 9002 ...
-#### 3. Pulling latest submodules from remote
-#### 4. Migration data should be present in the api container
-#### 5. System account should exist in the db
-
