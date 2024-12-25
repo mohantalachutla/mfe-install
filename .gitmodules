@@ -7,3 +7,6 @@
 [submodule "mongoapi"]
 	path = mongoapi
 	url = git@github.com:mohantalachutla/mongoapi.git
+[submodule "mfe-dashboard"]
+	path = mfe-dashboard
+	url = git@github.com:mohantalachutla/mfe-dashboard.git
