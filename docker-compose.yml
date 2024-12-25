@@ -1,0 +1,92 @@
+version: "3.2"
+services:
+    mongodb:
+        image: mongo
+        # environment: 
+        #-   MONGO_INIT_ROOT_USERNAME='root'
+        #-   MONGO_INIT_ROOT_PASSWORD='root'
+        ports: 
+        -   27017:27017
+        networks:
+        -   api-net
+        -   mongo-express-net
+        volumes: 
+        -   ./databases/mongodb:/data/mongodb
+    mongo-app:
+        image: mongo-express
+        environment: 
+        -   ME_CONFIG_MONGODB_SERVER=mongodb
+        #-   ME_CONFIG_MONGODB_AUTH_USERNAME='root'
+        #-   ME_CONFIG_MONGODB_AUTH_PASSWORD='root'
+        ports: 
+        -   8081:8081
+        links: 
+        -   mongodb
+        networks:
+        -   mongo-express-net
+        restart: on-failure
+    api:
+        image: api
+        build:
+            context: ./mongoapi
+            dockerfile: Dockerfile
+        environment: 
+        -   NODE_ENV=development
+        -   PORT=3001
+        -   MONGO_DB_URL='mongodb://mongodb:27017/default'
+        -   FILE_STORE=images
+        -   CORS_ORIGIN=http://localhost:4200,http://localhost:8080,http://localhost:8000,http://localhost:9001
+        -   JWT_SECRET=itasecret
+        ports: 
+        -   3001:3001
+        networks:
+        -   api-net
+        -   app-net
+        links: 
+        -   mongodb
+        restart: on-failure
+    app:
+        image: host
+        environment: 
+        -   NODE_ENV=development
+        -   APP_REGISTRY_URI=http://api:3001
+        -   API_URL=http://api:3001
+        -   TOKEN_KEY=a2z_token
+        build: 
+            context: ./mfe-host-starter
+            dockerfile: Dockerfile
+        ports: 
+        -   8080:8080
+        #network_mode: host
+        networks: 
+        -   app-net
+        depends_on: 
+        -   api
+        restart: on-failure
+    product:
+        image: product
+        environment: 
+        -   NODE_ENV=development
+        -   APP_REGISTRY_URI=http://api:3001
+        -   API_URL=http://api:3001
+        -   TOKEN_KEY=a2z_token
+        build: 
+            context: ./mfe-starter-react
+            dockerfile: Dockerfile
+        ports: 
+        -   9001:9001
+        #network_mode: host
+        networks: 
+        -   app-net
+        depends_on: 
+        -   api
+        restart: on-failure
+networks:
+    app-net:
+        driver: bridge
+    api-net:
+        driver: bridge
+    mongo-express-net:
+        driver: bridge
+volumes: 
+    database-vol:
