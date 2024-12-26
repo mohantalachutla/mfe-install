@@ -28,6 +28,10 @@ git clone git@github.com:mohantalachutla/mfe-install.git
 #### 6. Inject Store
 ###### A Redux based Library to manage synchronized state across MFEs and Host
 
+## DIAGRAM
+![MFE ARCHITECTURE drawio](https://github.com/user-attachments/assets/e7946ca8-062b-4586-9ecf-57db8c52364b)
+
+
 ## TROUBLESHOOTING
 #### 1. .ENV file should be present in the root directory of respective submodules
 #### 2. Migration data should be present in the api container
