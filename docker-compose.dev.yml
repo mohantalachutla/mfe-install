@@ -26,7 +26,10 @@ services:
         -   mongo-express-net
         restart: on-failure
     api:
-        image: mohantalachutla/mf-api
+        image: api
+        build:
+            context: ./mongoapi
+            dockerfile: Dockerfile
         environment: 
         -   NODE_ENV=development
         -   PORT=3001
@@ -43,11 +46,14 @@ services:
         -   mongodb
         restart: on-failure
     app:
-        image: mohantalachutla/mf-host
+        image: host
         environment: 
         -   NODE_ENV=development
         -   API_URL=http://api:3001
         -   TOKEN_KEY=a2z_token
+        build: 
+            context: ./mfe-host-starter
+            dockerfile: Dockerfile
         ports: 
         -   8080:8080
         #network_mode: host
@@ -57,11 +63,14 @@ services:
         -   api
         restart: on-failure
     dashboard:
-        image: mohantalachutla/mf-dashboard
+        image: dashboard
         environment: 
         -   NODE_ENV=development
         -   API_URL=http://api:3001
         -   TOKEN_KEY=a2z_token
+        build: 
+            context: ./mfe-dashboard
+            dockerfile: Dockerfile
         ports: 
         -   8000:8000
         #network_mode: host
@@ -71,12 +80,15 @@ services:
         -   api
         restart: on-failure
     product:
-        image: mohantalachutla/mf-product
+        image: product
         environment: 
         -   NODE_ENV=development
         -   APP_REGISTRY_URI=http://api:3001
         -   API_URL=http://api:3001
         -   TOKEN_KEY=a2z_token
+        build: 
+            context: ./mfe-starter-react
+            dockerfile: Dockerfile
         ports: 
         -   9001:9001
         #network_mode: host
