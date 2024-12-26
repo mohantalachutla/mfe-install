@@ -29,8 +29,7 @@ git clone git@github.com:mohantalachutla/mfe-install.git
 ###### A Redux based Library to manage synchronized state across MFEs and Host
 
 ## DIAGRAM
-![MFE ARCHITECTURE drawio](https://github.com/user-attachments/assets/e7946ca8-062b-4586-9ecf-57db8c52364b)
-
+![MFE ARCHITECTURE](https://github.com/user-attachments/assets/2f246bcf-9d02-4867-997d-a872b4417b7a)
 
 ## TROUBLESHOOTING
 #### 1. .ENV file should be present in the root directory of respective submodules
