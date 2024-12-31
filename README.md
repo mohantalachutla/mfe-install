@@ -8,9 +8,17 @@ Or
 ```bash
 git clone git@github.com:mohantalachutla/mfe-install.git
 ```
-#### 2. Run
+#### 2. Pull from docker hub and run
+```bash
+. start.sh
+```
+#### 3. Install by building
 ```bash
 . install.sh
+```
+#### 4. Push to docker hub
+```bash
+. push.sh
 ```
 
 
